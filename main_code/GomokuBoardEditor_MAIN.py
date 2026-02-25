@@ -38,6 +38,7 @@ class MainWindow(QtWidgets.QMainWindow):
 		# ----- 돌 이미지 -----
 		self.pix_black = QtGui.QPixmap("img/BlackStone.png")
 		self.pix_white = QtGui.QPixmap("img/WhiteStone.png")
+		self.pix_marker = QtGui.QPixmap("img/marker.png")
 
 		# UI에 샘플로 있던 라벨은 숨김(원하면 지워도 됨)
 		self.ui.BlackStone.hide()
@@ -91,16 +92,28 @@ class MainWindow(QtWidgets.QMainWindow):
 		self.ui.Board.setMouseTracking(True)
 		self.setMouseTracking(True)
 
+		# 키 입력 받기 (스페이스)
+		self.setFocusPolicy(QtCore.Qt.FocusPolicy.StrongFocus)
+		self.ui.Board.setFocusPolicy(QtCore.Qt.FocusPolicy.StrongFocus)
+
+		# 현재 커서가 가리키는 칸
+		self.hover_cell = None
+		self.allow_overwrite = False
+
 
 
 	def eventFilter(self, obj, event):
 		if obj is self.ui.Board:
 			etype = event.type()
 
-			# 누르기 시작
+			# ====== 마우스 클릭 시작 ======
 			if etype == QtCore.QEvent.Type.MouseButtonPress:
 				pos = event.position()
 				px, py = int(pos.x()), int(pos.y())
+
+				cell = self.pixel_to_cell(px, py)
+				self.hover_cell = cell
+				self.setFocus()
 
 				if event.button() == QtCore.Qt.MouseButton.LeftButton:
 					self.dragging = True
@@ -115,36 +128,47 @@ class MainWindow(QtWidgets.QMainWindow):
 					return True
 
 				self.last_cell = None
-				self.handle_click(px, py, self.drag_stone)
+
+				# 클릭 1회 즉시 처리
+				if cell is not None:
+					x, y = cell
+					if self.drag_stone == EMPTY:
+						self.remove_stone(x, y)
+					else:
+						if self.allow_overwrite or self.board[y][x] == EMPTY:
+							self.board[y][x] = self.drag_stone
+							self.place_stone(x, y, self.drag_stone)
+
 				return True
 
-			# 누른 채 이동(드래그)
-			if etype == QtCore.QEvent.Type.MouseMove and self.dragging:
+			# ====== 마우스 이동: hover 갱신 + (드래그 중이면 연속 설치) ======
+			if etype == QtCore.QEvent.Type.MouseMove:
 				pos = event.position()
 				px, py = int(pos.x()), int(pos.y())
 
 				cell = self.pixel_to_cell(px, py)
-				if cell is None:
+				self.hover_cell = cell
+				self.setFocus()
+
+				if not self.dragging:
 					return True
 
-				# 같은 칸이면 패스(연속 중복 방지)
-				if cell == self.last_cell:
+				if cell is None or cell == self.last_cell:
 					return True
 
 				self.last_cell = cell
 				x, y = cell
 
-				# 여기서 바로 처리(픽셀 말고 좌표로 빠르게)
 				if self.drag_stone == EMPTY:
 					self.remove_stone(x, y)
 				else:
-					if self.board[y][x] == EMPTY:
+					if self.allow_overwrite or self.board[y][x] == EMPTY:
 						self.board[y][x] = self.drag_stone
 						self.place_stone(x, y, self.drag_stone)
 
 				return True
 
-			# 버튼 떼면 종료
+			# ====== 마우스 클릭 끝 ======
 			if etype == QtCore.QEvent.Type.MouseButtonRelease:
 				self.dragging = False
 				self.drag_stone = EMPTY
@@ -152,7 +176,27 @@ class MainWindow(QtWidgets.QMainWindow):
 				return True
 
 		return super().eventFilter(obj, event)
+	def keyPressEvent(self, event):
+		if event.key() == QtCore.Qt.Key.Key_Space:
+			if self.hover_cell is None:
+				return
 
+			x, y = self.hover_cell
+
+			# 토글: 이미 MARK면 삭제, 아니면 설치
+			if self.board[y][x] == 3:
+				self.remove_stone(x, y)
+				return
+
+			# 덮어쓰기 OFF면 빈칸에만 설치, ON이면 어디든 설치(원하면 MARK만 예외 처리 가능)
+			if (not self.allow_overwrite) and self.board[y][x] != EMPTY:
+				return
+
+			self.board[y][x] = 3
+			self.place_stone(x, y, 3)
+			return
+
+		super().keyPressEvent(event)
 	def handle_click(self, px, py, stone_type):
 		cell = self.pixel_to_cell(px, py)
 		if cell is None:
@@ -208,7 +252,12 @@ class MainWindow(QtWidgets.QMainWindow):
 			self.placed_stones[(x, y)].deleteLater()
 			del self.placed_stones[(x, y)]
 
-		pix = self.pix_black if stone_type == BLACK else self.pix_white
+		if stone_type == BLACK:
+			pix = self.pix_black
+		elif stone_type == WHITE:
+			pix = self.pix_white
+		else:
+			pix = self.pix_marker
 
 		stone = QtWidgets.QLabel(parent=self.ui.Board)
 		stone.setScaledContents(True)
@@ -335,7 +384,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 	def reset(self):
 		self.clear_board()
-		self.reset_sound.play()
+		# self.reset_sound.play()
 		QtWidgets.QMessageBox.information(
 			self,
 			"알@림",

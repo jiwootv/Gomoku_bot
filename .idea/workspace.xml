@@ -4,22 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a61af67c-2da3-4d5d-a1aa-aa7f8fb5d8b6" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/오목봇.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_code/GomokuBoardEditor_MAIN.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_code/Gomoku_Board.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_code/sound/Billy Ang.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_code/sound/Boom.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_code/sound/Slap.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_code/sound/fart.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_code/sound/tuco-get-out.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_code/sound/tuco-get-out.wav" afterDir="false" />
+    <list default="true" id="a61af67c-2da3-4d5d-a1aa-aa7f8fb5d8b6" name="변경" comment=" 대충 UI 만드는데 시간을 낭비 www">
+      <change afterPath="$PROJECT_DIR$/main_code/FATAL_WRONG_VERSION.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_gomoku_board.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +24,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "jiwootv"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/jiwootv/Gomoku_bot.git",
+    "accountId": "d6348422-5901-4c87-a165-6305ad3a4fc7"
+  }
+}]]></component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 1
 }]]></component>
@@ -48,6 +48,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Python.BoardEditor.executor": "Run",
+    "Python.FATAL_WRONG_VERSION.executor": "Run",
     "Python.GomokuBoardEditor_MAIN.executor": "Run",
     "Python.GomokuEditor_base.executor": "Run",
     "Python.Gomoku_Board.executor": "Run",
@@ -84,6 +85,27 @@
       <option name="presentableId" value="Default" />
       <updated>1772021486949</updated>
     </task>
+    <task id="LOCAL-00001" summary=" 대충 UI 만드는데 시간을 낭비 www">
+      <option name="closed" value="true" />
+      <created>1772033080924</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1772033080924</updated>
+    </task>
+    <task id="LOCAL-00002" summary=" 대충 UI 만드는데 시간을 낭비 www">
+      <option name="closed" value="true" />
+      <created>1772033117190</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1772033117190</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value=" 대충 UI 만드는데 시간을 낭비 www" />
+    <option name="LAST_COMMIT_MESSAGE" value=" 대충 UI 만드는데 시간을 낭비 www" />
   </component>
 </project>

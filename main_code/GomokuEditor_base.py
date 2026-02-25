@@ -98,7 +98,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.Title.setText(_translate("MainWindow", "Gomoku Board"))
         self.subtitle.setText(_translate("MainWindow", "개쩌는 오목 타일 에디아터임!@!!!"))
-        self.Desctription1.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700; font-style:italic;\">How to use:</span></p><p>매우 쉬움!<br/>FIle에서 저장 버튼을 누르면</p><p>저장이 되고요</p><p>로드를 누르면 로드가 됩니다!</p></body></html>"))
+        self.Desctription1.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700; font-style:italic;\">How to use:</span></p><p>매우 쉬움!<br/>FIle에서 저장 버튼을 누르면</p><p>저장이 되고요</p><p>로드를 누르면 로드가 됩니다!</p><p>좌/우 클 각각 백돌흑돌</p><p>스페이스바 마커설치</p></body></html>"))
         self.MYNAME.setText(_translate("MainWindow", "By YJ"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.actionSave_As.setText(_translate("MainWindow", "Save As.."))

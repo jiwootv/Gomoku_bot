@@ -25,7 +25,6 @@ REF_CELL_Y = 7
 
 
 
-
 class MainWindow(QtWidgets.QMainWindow):
 	def __init__(self):
 		super().__init__()
@@ -99,6 +98,7 @@ class MainWindow(QtWidgets.QMainWindow):
 		# 현재 커서가 가리키는 칸
 		self.hover_cell = None
 		self.allow_overwrite = False
+
 
 
 
@@ -382,6 +382,13 @@ class MainWindow(QtWidgets.QMainWindow):
 		)
 		self.statusBar().showMessage(f"파일 불@러옴: {path}", 3000)
 
+		# 클래스 인스턴스 정의
+		self.GomokuBoard = Gomoku_Board.GomokuBoard(self.board)
+
+		k = self.GomokuBoard.setmarker()
+		for s in k:
+			self.place_stone(s["x"], s["y"], 3)
+
 	def reset(self):
 		self.clear_board()
 		# self.reset_sound.play()
@@ -391,6 +398,7 @@ class MainWindow(QtWidgets.QMainWindow):
 			"당신의 바둑돌은 모두 뒤1졌습니다!"
 		)
 		self.statusBar().showMessage(f"현재 바둑판 말소됨", 3000)
+
 
 if __name__ == "__main__":
 	app = QtWidgets.QApplication(sys.argv)

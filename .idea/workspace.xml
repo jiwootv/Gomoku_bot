@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a61af67c-2da3-4d5d-a1aa-aa7f8fb5d8b6" name="변경" comment=" 대충 UI 만드는데 시간을 낭비 www">
-      <change afterPath="$PROJECT_DIR$/main_code/FATAL_WRONG_VERSION.py" afterDir="false" />
+    <list default="true" id="a61af67c-2da3-4d5d-a1aa-aa7f8fb5d8b6" name="변경" comment="피곤하다&#10;다른건 아니고 마커 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui_gomoku_board.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_code/GomokuBoardEditor_MAIN.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_code/GomokuBoardEditor_MAIN.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_code/Gomoku_Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_code/Gomoku_Board.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_code/Return/ANG.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_code/Return/X.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_code/Return/떡갈비.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_code/Return/배고프다.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_code/Return/써견.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,41 +29,41 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "jiwootv"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;jiwootv&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/jiwootv/Gomoku_bot.git",
-    "accountId": "d6348422-5901-4c87-a165-6305ad3a4fc7"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/jiwootv/Gomoku_bot.git&quot;,
+    &quot;accountId&quot;: &quot;d6348422-5901-4c87-a165-6305ad3a4fc7&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="3AA3KpuJN8eQtelmMTxsKtbCAxO" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.BoardEditor.executor": "Run",
-    "Python.FATAL_WRONG_VERSION.executor": "Run",
-    "Python.GomokuBoardEditor_MAIN.executor": "Run",
-    "Python.GomokuEditor_base.executor": "Run",
-    "Python.Gomoku_Board.executor": "Run",
-    "Python.gomokuboardEditor.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/PC/PycharmProjects/오목봇/main_code",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.BoardEditor.executor&quot;: &quot;Run&quot;,
+    &quot;Python.FATAL_WRONG_VERSION.executor&quot;: &quot;Run&quot;,
+    &quot;Python.GomokuBoardEditor_MAIN.executor&quot;: &quot;Run&quot;,
+    &quot;Python.GomokuEditor_base.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Gomoku_Board.executor&quot;: &quot;Run&quot;,
+    &quot;Python.gomokuboardEditor.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/PC/PycharmProjects/오목봇/main_code&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\PC\PycharmProjects\오목봇\main_code" />
@@ -101,11 +106,20 @@
       <option name="project" value="LOCAL" />
       <updated>1772033117190</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="피곤하다&#10;다른건 아니고 마커 추가">
+      <option name="closed" value="true" />
+      <created>1772034781381</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1772034781381</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value=" 대충 UI 만드는데 시간을 낭비 www" />
-    <option name="LAST_COMMIT_MESSAGE" value=" 대충 UI 만드는데 시간을 낭비 www" />
+    <MESSAGE value="피곤하다&#10;다른건 아니고 마커 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="피곤하다&#10;다른건 아니고 마커 추가" />
   </component>
 </project>

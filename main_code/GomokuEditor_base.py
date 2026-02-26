@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'C:\Users\PC\PycharmProjects\오목봇\main_code\GomokuBoardEditor.ui'
+# Form implementation generated from reading ui file 'main_code/GomokuBoardEditor.ui'
 #
 # Created by: PyQt6 UI code generator 6.10.2
 #
@@ -13,6 +13,8 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
+        MainWindow.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.ArrowCursor))
+        MainWindow.setDockNestingEnabled(True)
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.Title = QtWidgets.QLabel(parent=self.centralwidget)
@@ -61,50 +63,81 @@ class Ui_MainWindow(object):
         font.setPointSize(36)
         self.MYNAME.setFont(font)
         self.MYNAME.setObjectName("MYNAME")
+        self.xRowValue = QtWidgets.QSpinBox(parent=self.centralwidget)
+        self.xRowValue.setGeometry(QtCore.QRect(0, 310, 80, 26))
+        self.xRowValue.setMinimum(1)
+        self.xRowValue.setMaximum(16)
+        self.xRowValue.setObjectName("xRowValue")
+        self.yRowValue = QtWidgets.QSpinBox(parent=self.centralwidget)
+        self.yRowValue.setGeometry(QtCore.QRect(140, 310, 80, 26))
+        self.yRowValue.setMinimum(1)
+        self.yRowValue.setMaximum(16)
+        self.yRowValue.setObjectName("yRowValue")
+        self.label = QtWidgets.QLabel(parent=self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(0, 260, 291, 51))
+        font = QtGui.QFont()
+        font.setFamily("둥근모꼴")
+        font.setPointSize(16)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(parent=self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(0, 340, 111, 21))
+        self.label_2.setObjectName("label_2")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 33))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtWidgets.QMenu(parent=self.menubar)
         self.menuFile.setObjectName("menuFile")
-
+        self.menuBoard = QtWidgets.QMenu(parent=self.menubar)
+        self.menuBoard.setObjectName("menuBoard")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(parent=MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-
         self.actionSave_As = QtGui.QAction(parent=MainWindow)
         self.actionSave_As.setObjectName("actionSave_As")
-
         self.actionDrag_or_Click = QtGui.QAction(parent=MainWindow)
         self.actionDrag_or_Click.setObjectName("actionDrag_or_Click")
-
         self.actionLoad = QtGui.QAction(parent=MainWindow)
         self.actionLoad.setObjectName("actionLoad")
-
         self.actionReset = QtGui.QAction(parent=MainWindow)
         self.actionReset.setObjectName("actionReset")
-
+        self.actionMarker = QtGui.QAction(parent=MainWindow)
+        self.actionMarker.setObjectName("actionMarker")
+        self.actionGetRow = QtGui.QAction(parent=MainWindow)
+        self.actionGetRow.setObjectName("actionGetRow")
+        self.actionReset = QtGui.QAction(parent=MainWindow)
+        self.actionReset.setObjectName("actionReset_1")
         self.menuFile.addAction(self.actionSave_As)
         self.menuFile.addAction(self.actionLoad)
-        self.menuFile.addAction(self.actionReset)
+        self.menuBoard.addAction(self.actionMarker)
+        self.menuBoard.addAction(self.actionGetRow)
+        self.menuBoard.addAction(self.actionReset)
         self.menubar.addAction(self.menuFile.menuAction())
+        self.menubar.addAction(self.menuBoard.menuAction())
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Gomoku Board Editor"))
         self.Title.setText(_translate("MainWindow", "Gomoku Board"))
         self.subtitle.setText(_translate("MainWindow", "개쩌는 오목 타일 에디아터임!@!!!"))
-        self.Desctription1.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700; font-style:italic;\">How to use:</span></p><p>매우 쉬움!<br/>FIle에서 저장 버튼을 누르면</p><p>저장이 되고요</p><p>로드를 누르면 로드가 됩니다!</p><p>좌/우 클 각각 백돌흑돌</p><p>스페이스바 마커설치</p></body></html>"))
+        self.Desctription1.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700; font-style:italic;\">How to use:</span></p><p>매우 쉬움!<br/>FIle에서 저장 버튼을 누르면</p><p>저장이 되고요</p><p>로드를 누르면 로드가 됩니다!</p></body></html>"))
         self.MYNAME.setText(_translate("MainWindow", "By YJ"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p>GetRow / 그 위치의 Row 얻기</p></body></html>"))
+        self.label_2.setText(_translate("MainWindow", "순서대로 x, y입니다."))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
+        self.menuBoard.setTitle(_translate("MainWindow", "Board"))
         self.actionSave_As.setText(_translate("MainWindow", "Save As.."))
         self.actionDrag_or_Click.setText(_translate("MainWindow", "Drag or Click"))
         self.actionLoad.setText(_translate("MainWindow", "Load"))
-        self.actionReset.setText(_translate("MainWindow", "지금 바로 윤회"))
+        self.actionReset.setText(_translate("MainWindow", "Reset"))
+        self.actionMarker.setText(_translate("MainWindow", "Place marker"))
+        self.actionGetRow.setText(_translate("MainWindow", "Get Row list"))
+        self.actionReset.setText(_translate("MainWindow", "Reset"))
 
 
 if __name__ == "__main__":

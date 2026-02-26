@@ -10,8 +10,14 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="cursor">
+   <cursorShape>ArrowCursor</cursorShape>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Gomoku Board Editor</string>
+  </property>
+  <property name="dockNestingEnabled">
+   <bool>true</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="Title">
@@ -147,6 +153,70 @@
      <string>By YJ</string>
     </property>
    </widget>
+   <widget class="QSpinBox" name="xrowValue">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>310</y>
+      <width>80</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <number>16</number>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="yRowValue">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>310</y>
+      <width>80</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <number>16</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>260</y>
+      <width>291</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>둥근모꼴</family>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;GetRow / 그 위치의 Row 얻기&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>340</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>순서대로 x, y입니다.</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -164,7 +234,16 @@
     <addaction name="actionSave_As"/>
     <addaction name="actionLoad"/>
    </widget>
+   <widget class="QMenu" name="menuBoard">
+    <property name="title">
+     <string>Board</string>
+    </property>
+    <addaction name="actionPlace_marker"/>
+    <addaction name="actionGetMarker"/>
+    <addaction name="actionReset_3"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuBoard"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionSave_As">
@@ -180,6 +259,31 @@
   <action name="actionLoad">
    <property name="text">
     <string>Load</string>
+   </property>
+  </action>
+  <action name="actionReset">
+   <property name="text">
+    <string>Reset</string>
+   </property>
+  </action>
+  <action name="actionPlace_marker">
+   <property name="text">
+    <string>Place marker</string>
+   </property>
+  </action>
+  <action name="actionGetMarker">
+   <property name="text">
+    <string>Get Row list</string>
+   </property>
+  </action>
+  <action name="actionReset_2">
+   <property name="text">
+    <string>Reset</string>
+   </property>
+  </action>
+  <action name="actionReset_3">
+   <property name="text">
+    <string>Reset</string>
    </property>
   </action>
  </widget>

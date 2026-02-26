@@ -4,15 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a61af67c-2da3-4d5d-a1aa-aa7f8fb5d8b6" name="변경" comment="피곤하다&#10;다른건 아니고 마커 추가">
+    <list default="true" id="a61af67c-2da3-4d5d-a1aa-aa7f8fb5d8b6" name="변경" comment="마커 자동 설치 기능 (알파)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_code/GomokuBoardEditor.ui" beforeDir="false" afterPath="$PROJECT_DIR$/main_code/GomokuBoardEditor.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_code/GomokuBoardEditor_MAIN.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_code/GomokuBoardEditor_MAIN.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_code/GomokuEditor_base.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_code/GomokuEditor_base.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_code/Gomoku_Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_code/Gomoku_Board.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_code/Return/ANG.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_code/Return/X.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_code/Return/떡갈비.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_code/Return/배고프다.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_code/Return/써견.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_code/Return/fuck.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_code/Return/gomoku_board.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_code/Return/just one stone.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_code/Return/many stone.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,8 +70,8 @@
       <recent name="C:\Users\PC\PycharmProjects\오목봇\main_code" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\PC\PycharmProjects\오목봇\main_code\sound" />
       <recent name="C:\Users\PC\PycharmProjects\오목봇\main_code" />
+      <recent name="C:\Users\PC\PycharmProjects\오목봇\main_code\sound" />
       <recent name="C:\Users\PC\PycharmProjects\오목봇\main_code\Return" />
     </key>
   </component>
@@ -114,12 +115,40 @@
       <option name="project" value="LOCAL" />
       <updated>1772034781381</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="마커 자동 설치 기능 (알파)">
+      <option name="closed" value="true" />
+      <created>1772116166633</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1772116166633</updated>
+    </task>
+    <task id="LOCAL-00005" summary="마커 자동 설치 기능 (알파)">
+      <option name="closed" value="true" />
+      <created>1772116468675</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1772116468675</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value=" 대충 UI 만드는데 시간을 낭비 www" />
     <MESSAGE value="피곤하다&#10;다른건 아니고 마커 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="피곤하다&#10;다른건 아니고 마커 추가" />
+    <MESSAGE value="마커 자동 설치 기능 (알파)" />
+    <option name="LAST_COMMIT_MESSAGE" value="마커 자동 설치 기능 (알파)" />
   </component>
 </project>

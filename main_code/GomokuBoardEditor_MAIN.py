@@ -7,6 +7,9 @@ from PyQt6.QtCore import QUrl
 import json
 import Gomoku_Board
 
+# === FUNNYMODE ===
+FUNNYMODE = False
+
 SIZE = 15
 EMPTY = 0
 BLACK = 1
@@ -22,7 +25,6 @@ REF_WIN_Y = 270
 # 기준점이 의미하는 칸 좌표(일단 중앙)
 REF_CELL_X = 6
 REF_CELL_Y = 7
-
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -61,6 +63,8 @@ class MainWindow(QtWidgets.QMainWindow):
 		self.ui.actionSave_As.triggered.connect(self.save_as)
 		self.ui.actionLoad.triggered.connect(self.load_board)
 		self.ui.actionReset.triggered.connect(self.reset)
+		self.ui.actionMarker.triggered.connect(self.set_marker)
+		self.ui.actionGetRow.triggered.connect(self.get_rows)
 
 		# 소@리들
 		self.place_sound = QSoundEffect()
@@ -83,7 +87,6 @@ class MainWindow(QtWidgets.QMainWindow):
 		self.reset_sound.setSource(QUrl.fromLocalFile("sound/Boom.wav"))
 		self.save_sound.setVolume(0.1)
 
-
 		self.dragging = False
 		self.drag_stone = EMPTY
 		self.last_cell = None
@@ -99,8 +102,8 @@ class MainWindow(QtWidgets.QMainWindow):
 		self.hover_cell = None
 		self.allow_overwrite = False
 
-
-
+		# class 인스턴스 지정.
+		self.GomokuBoard = Gomoku_Board.GomokuBoard(self.board)
 
 	def eventFilter(self, obj, event):
 		if obj is self.ui.Board:
@@ -176,6 +179,7 @@ class MainWindow(QtWidgets.QMainWindow):
 				return True
 
 		return super().eventFilter(obj, event)
+
 	def keyPressEvent(self, event):
 		if event.key() == QtCore.Qt.Key.Key_Space:
 			if self.hover_cell is None:
@@ -197,6 +201,7 @@ class MainWindow(QtWidgets.QMainWindow):
 			return
 
 		super().keyPressEvent(event)
+
 	def handle_click(self, px, py, stone_type):
 		cell = self.pixel_to_cell(px, py)
 		if cell is None:
@@ -214,6 +219,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
 		self.board[y][x] = stone_type
 		self.place_stone(x, y, stone_type)
+
+	def board_instance_update(self):
+		self.GomokuBoard = Gomoku_Board.GomokuBoard(self.board)
 
 	def pixel_to_cell(self, px, py):
 		# Board 라벨 내부 픽셀 -> (x,y)
@@ -245,7 +253,8 @@ class MainWindow(QtWidgets.QMainWindow):
 		return (cx, cy)
 
 	def place_stone(self, x, y, stone_type, sound=True):
-		if sound: self.place_sound.play()
+		if sound:
+			self.place_sound.play()
 		# 기존 라벨 있으면 제거
 		if (x, y) in self.placed_stones:
 			# self.delete_sound.play()
@@ -284,7 +293,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
 		if (x, y) in self.placed_stones:
 			self.placed_stones[(x, y)].deleteLater()
-			self.delete_sound.play()
+			if FUNNYMODE:
+				self.delete_sound.play()
 			del self.placed_stones[(x, y)]
 
 	def clear_board(self):
@@ -297,7 +307,7 @@ class MainWindow(QtWidgets.QMainWindow):
 	def save_as(self):
 		path, _ = QtWidgets.QFileDialog.getSaveFileName(
 			self,
-			"Save Board As..",
+			"판 저장하기",
 			"gomoku_board.json",
 			"JSON Files (*.json);;All Files (*.*)"
 		)
@@ -321,12 +331,13 @@ class MainWindow(QtWidgets.QMainWindow):
 		text = json.dumps(self.board, ensure_ascii=False)
 
 		QtWidgets.QApplication.clipboard().setText(text)
+		if FUNNYMODE:
+			QtWidgets.QMessageBox.information(
+				self,
+				"알@림",
+				"성공적으로 저장되었습니다.\nReturn 폴더를 확인하시오 브로."
+			)
 
-		QtWidgets.QMessageBox.information(
-			self,
-			"알@림",
-			"성공적으로 저장되었습니다.\nReturn 폴더를 확인하시오 브로."
-		)
 		self.statusBar().showMessage(f"Saved: {path}", 3000)
 
 	def load_board(self):
@@ -382,22 +393,90 @@ class MainWindow(QtWidgets.QMainWindow):
 		)
 		self.statusBar().showMessage(f"파일 불@러옴: {path}", 3000)
 
-		# 클래스 인스턴스 정의
-		self.GomokuBoard = Gomoku_Board.GomokuBoard(self.board)
+	def set_marker(self):
+		self.board_instance_update()
 
 		k = self.GomokuBoard.setmarker()
 		for s in k:
-			self.place_stone(s["x"], s["y"], 3)
+			self.place_stone(s["x"], s["y"], 3, sound=False)
+
+		if FUNNYMODE:
+			self.save_sound.play()
+			QtWidgets.QMessageBox.information(
+				self,
+				"알@림",
+				"돌들을 성공적으로 포@박했습니다."
+			)
+			self.statusBar().showMessage(f"마커로 구속 완료", 3000)
+		else:
+			QtWidgets.QMessageBox.information(
+				self,
+				"알림",
+				"바둑돌 주위에 마커 설치를 완료하였습니다."
+			)
+			self.statusBar().showMessage(f"마커 설치 완료", 3000)
+
+	def get_rows(self):
+		import traceback
+		try:
+			# UI 위젯 이름 확인 (여기서 틀리면 바로 잡힘)
+			if not hasattr(self.ui, "xRowValue"):
+				raise AttributeError("UI에 xrowValue 없음 (Designer objectName 확인)")
+			if not hasattr(self.ui, "yRowValue"):
+				raise AttributeError("UI에 yRowValue 없음 (Designer objectName 확인)")
+
+			# UI(1~15) -> 내부(0~14)
+			x = int(self.ui.xRowValue.value()) - 1
+			y = int(self.ui.yRowValue.value()) - 1
+
+			if not (0 <= x < SIZE and 0 <= y < SIZE):
+				raise ValueError(f"좌표 범위 밖: ({x},{y})")
+
+			v = self.board[y][x]
+			print(f"[GetRow] internal=({x},{y}) value={v}")
+
+			# 돌이 아닌 칸이면 라인 계산 안 함
+			if v not in (BLACK, WHITE):
+				QtWidgets.QMessageBox.information(self, "GetRow", f"({x + 1},{y + 1})에는 흑/백 돌이 없음. value={v}")
+				return None
+
+			# GomokuBoard 최신화
+			self.board_instance_update()
+
+			# get_lines 함수 존재 여부 체크
+			if not hasattr(self.GomokuBoard, "get_lines"):
+				raise AttributeError("GomokuBoard에 get_lines 함수가 없음 (Gomoku_Board.py에 구현했는지 확인)")
+
+			k = self.GomokuBoard.get_lines(x, y)
+			print("[GetRow result]", k)
+
+			QtWidgets.QMessageBox.information(self, "GetRow", str(k))
+			return k
+
+		except Exception:
+			err = traceback.format_exc()
+			QtWidgets.QMessageBox.critical(self, "GetRow Crash", err)
+			print(err)  # 터미널 실행 시 같이 보이게
+			return None
 
 	def reset(self):
 		self.clear_board()
-		# self.reset_sound.play()
-		QtWidgets.QMessageBox.information(
-			self,
-			"알@림",
-			"당신의 바둑돌은 모두 뒤1졌습니다!"
-		)
-		self.statusBar().showMessage(f"현재 바둑판 말소됨", 3000)
+		if FUNNYMODE:
+			self.reset_sound.play()
+			QtWidgets.QMessageBox.information(
+				self,
+				"알@림",
+				"당신의 바둑돌은 모두 뒤1졌습니다! 펑 터졌어요!"
+			)
+			self.statusBar().showMessage(f"현재 바둑판의 돌들 시체로 결정", 3000)
+		else:
+			QtWidgets.QMessageBox.information(
+				self,
+				"알림",
+				"판의 돌들을 성공적으로 제거하였습니다."
+			)
+			self.statusBar().showMessage(f"돌 리셋 완료", 3000)
+
 
 
 if __name__ == "__main__":

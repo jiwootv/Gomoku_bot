@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a61af67c-2da3-4d5d-a1aa-aa7f8fb5d8b6" name="변경" comment="마커 자동 설치 기능 (알파)">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_code/GomokuBoardEditor.ui" beforeDir="false" afterPath="$PROJECT_DIR$/main_code/GomokuBoardEditor.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_code/GomokuBoardEditor_MAIN.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_code/GomokuBoardEditor_MAIN.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_code/GomokuEditor_base.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_code/GomokuEditor_base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_code/Gomoku_Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_code/Gomoku_Board.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_code/Return/fuck.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_code/Return/gomoku_board.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_code/Return/just one stone.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_code/Return/many stone.json" beforeDir="false" />
-    </list>
+    <list default="true" id="a61af67c-2da3-4d5d-a1aa-aa7f8fb5d8b6" name="변경" comment="마커 자동 설치 기능 (알파)" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -131,7 +121,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772116468675</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="마커 자동 설치 기능 (알파)">
+      <option name="closed" value="true" />
+      <created>1772123516786</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1772123516786</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

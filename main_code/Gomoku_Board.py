@@ -1,4 +1,7 @@
 import json
+import MAINSETTINGS
+
+DEBUG_MODE = MAINSETTINGS.DEBUG_MODE
 
 SIZE = 15
 
@@ -21,11 +24,10 @@ class GomokuBoard:
 			for x in y:
 				print(x, end=" ")
 			print()
+		return self.board
 
 	def save_as(self, file_name):
 		path = "Return"
-		import json
-
 		suction = {}
 		for x in range(SIZE):
 			for y in range(SIZE):
@@ -74,14 +76,14 @@ class GomokuBoard:
 
 		# 4축 정의: (정방향, 역방향)
 		axes = {
-			"h": ((1, 0), (-1, 0)),		# 가로
-			"v": ((0, 1), (0, -1)),		# 세로
-			"d": ((1, 1), (-1, -1)),	# 대각 \
-			"ad": ((1, -1), (-1, 1))	# 역대각 /
+			"h": ((1, 0), (-1, 0)),  # 가로
+			"v": ((0, 1), (0, -1)),  # 세로
+			"d": ((1, 1), (-1, -1)),  # 대각 \
+			"ad": ((1, -1), (-1, 1))  # 역대각 /
 		}
 
 		lengths = {}
-		counts = {3: 0, 4: 0, 5: 0}	# 5는 "5 이상"으로 취급
+		counts = {3: 0, 4: 0, 5: 0}  # 5는 "5 이상"으로 취급
 
 		for name, (p, n) in axes.items():
 			pos = count_dir(p[0], p[1])
@@ -95,11 +97,10 @@ class GomokuBoard:
 				counts[4] += 1
 			elif length == 3:
 				counts[3] += 1
-
-		# 보기 좋게 출력도 해주고 싶으면:
-		print(f"Stone type: {stone} at ({x},{y})")
-		print("Axis lengths:", lengths)
-		print("Counts: 3-in-row =", counts[3], ", 4-in-row =", counts[4], ", 5+-in-row =", counts[5])
+		if DEBUG_MODE:
+			print(f"Stone type: {stone} at ({x},{y})")
+			print("Axis lengths:", lengths)
+			print("Counts: 3-in-row =", counts[3], ", 4-in-row =", counts[4], ", 5+-in-row =", counts[5])
 
 		return {
 			"type": stone,
@@ -107,7 +108,7 @@ class GomokuBoard:
 			"counts": counts
 		}
 
-	def setmarker(self):
+	def setMarker(self):
 		markers = []
 		for x in range(SIZE):
 			for y in range(SIZE):
@@ -119,29 +120,79 @@ class GomokuBoard:
 					* / *
 					* * *
 					"""
-					print("______")
-					print(f"TYPE: {self.board[y][x]} / Position: ({x+1},{y+1})")
-					direction = [[-1, 1], [0, 1], [1, 1], [1,0], [1, -1], [0, -1], [-1, -1], [-1, 0]]
+					if DEBUG_MODE:
+						print("______")
+						print(f"TYPE: {self.board[y][x]} / Position: ({x + 1},{y + 1})")
+					direction = [[-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1], [-1, -1], [-1, 0]]
 					for dr in direction:
 						x1 = x + dr[0]
 						y1 = y + dr[1]
-						print(x1+1, y1+1)
+						print(x1 + 1, y1 + 1)
 						if x1 < 0:
 							x1 = 0
 						if x1 >= SIZE:
-							x1 = SIZE-1
+							x1 = SIZE - 1
 						if y1 < 0:
 							y1 = 0
-						if y1+1 >= SIZE:
-							y1 = SIZE-1
-						print(x1 + 1, y1 + 1)
+						if y1 + 1 >= SIZE:
+							y1 = SIZE - 1
+						if DEBUG_MODE: print(x1 + 1, y1 + 1)
 						if self.board[y1][x1] != 1 and self.board[y1][x1] != 2:  # 흑돌 또는 백돌이 아니면:
-
 							try:
-								print(f"Pos: ({x1+1},{y1+1}) / {self.board[y1][x1]}")
+								if DEBUG_MODE: print(f"Pos: ({x1 + 1},{y1 + 1}) / {self.board[y1][x1]}")
 								markers.append({"x": x1, "y": y1, "type": self.board[y1][x1]})
 							except:
-								print("ERROR")
-		for _ in markers:
-			print(_)
+								if DEBUG_MODE: print("ERROR")
+		if DEBUG_MODE:
+			for _ in markers:
+				print(_)
 		return markers
+
+	def getScore(self, x, y):
+		# 공격만: (x,y)에 이미 놓인 내 돌(1/2)의 강함을 평가
+		linedict = self.get_lines(x, y)
+		if linedict is None:
+			return 0
+
+		score = 0
+
+		# counts 기반(축 중 몇 개가 3/4/5+ 인지)
+		c3 = linedict["counts"][3]
+		c4 = linedict["counts"][4]
+		c5 = linedict["counts"][5]
+
+		# lengths 기반(각 축 길이)
+		L = linedict["lengths"]  # {"h":..,"v":..,"d":..,"ad":..}
+
+		# ---- 1) 승리/즉승급 ----
+		if c5 > 0:
+			return 10_000_000  # 5목이면 최상
+
+		# ---- 2) 4줄은 매우 큼 ----
+		# (4가 여러 축이면 더 큼)
+		score += c4 * 200_000
+
+		# ---- 3) 3줄 ----
+		score += c3 * 5_000
+
+		# ---- 4) 축 길이 보너스(2,3,4에 대해 추가로 가산) ----
+		# 길이 자체를 조금 더 세밀하게 반영
+		for name in ("h", "v", "d", "ad"):
+			length = L[name]
+			if length == 4:
+				score += 50_000
+			elif length == 3:
+				score += 2_000
+			elif length == 2:
+				score += 200
+
+		# ---- 5) “더블 쓰리 / 더블 포” 같은 복합 패턴 보너스 ----
+		# 공격만 기준
+		if c4 >= 2:
+			score += 500_000  # 4가 2개면 거의 끝
+		elif c4 >= 1 and c3 >= 1:
+			score += 150_000  # 4+3은 강력
+		elif c3 >= 2:
+			score += 30_000  # 더블 3
+
+		return score

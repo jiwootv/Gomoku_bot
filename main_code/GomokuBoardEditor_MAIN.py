@@ -7,8 +7,11 @@ from PyQt6.QtCore import QUrl
 import json
 import Gomoku_Board
 
-# === FUNNYMODE ===
-FUNNYMODE = False
+import MAINSETTINGS
+
+# === 환경변수 ===
+FUNNYMODE = MAINSETTINGS.FUNNYMODE
+DEBUG_MODE = MAINSETTINGS.DEBUG_MODE
 
 SIZE = 15
 EMPTY = 0
@@ -26,6 +29,7 @@ REF_WIN_Y = 270
 REF_CELL_X = 6
 REF_CELL_Y = 7
 
+if DEBUG_MODE: print("Main File Loaded")
 
 class MainWindow(QtWidgets.QMainWindow):
 	def __init__(self):
@@ -104,6 +108,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
 		# class 인스턴스 지정.
 		self.GomokuBoard = Gomoku_Board.GomokuBoard(self.board)
+
+		if DEBUG_MODE: print("Mainwindow: __init__ loaded")
 
 	def eventFilter(self, obj, event):
 		if obj is self.ui.Board:
@@ -327,15 +333,22 @@ class MainWindow(QtWidgets.QMainWindow):
 			json.dump(data, f, indent=2, ensure_ascii=False)
 
 		# 일단: JSON 문자열을 클립보드에 복사 + 간단 알림
-		self.save_sound.play()
+
 		text = json.dumps(self.board, ensure_ascii=False)
 
 		QtWidgets.QApplication.clipboard().setText(text)
 		if FUNNYMODE:
+			self.save_sound.play()
 			QtWidgets.QMessageBox.information(
 				self,
 				"알@림",
 				"성공적으로 저장되었습니다.\nReturn 폴더를 확인하시오 브로."
+			)
+		else:
+			QtWidgets.QMessageBox.information(
+				self,
+				"알림",
+				"성공적으로 저장되었습니다.\nReturn 폴더를 확인하세요."
 			)
 
 		self.statusBar().showMessage(f"Saved: {path}", 3000)
@@ -385,18 +398,27 @@ class MainWindow(QtWidgets.QMainWindow):
 				self.board[y][x] = v
 				if v != EMPTY:
 					self.place_stone(x, y, v, sound=False)
-		self.load_sound.play()
-		QtWidgets.QMessageBox.information(
-			self,
-			"알@림",
-			"파일을 성공적으로 로드하였습니다.\n성공적이지 못했으면 아쉬운거지 뭐"
-		)
-		self.statusBar().showMessage(f"파일 불@러옴: {path}", 3000)
+		if FUNNYMODE:
+			self.load_sound.play()
+			QtWidgets.QMessageBox.information(
+				self,
+				"알@림",
+				"파일을 성공적으로 로드하였습니다.\n성공적이지 못했으면 아쉬운거지 뭐"
+			)
+			self.statusBar().showMessage(f"파일 불@러옴: {path}", 3000)
+		else:
+			self.load_sound.play()
+			QtWidgets.QMessageBox.information(
+				self,
+				"알림",
+				"파일을 성공적으로 로드하였습니다."
+			)
+			self.statusBar().showMessage(f"파일 불러옴: {path}", 3000)
 
 	def set_marker(self):
 		self.board_instance_update()
 
-		k = self.GomokuBoard.setmarker()
+		k = self.GomokuBoard.setMarker()
 		for s in k:
 			self.place_stone(s["x"], s["y"], 3, sound=False)
 
@@ -433,7 +455,7 @@ class MainWindow(QtWidgets.QMainWindow):
 				raise ValueError(f"좌표 범위 밖: ({x},{y})")
 
 			v = self.board[y][x]
-			print(f"[GetRow] internal=({x},{y}) value={v}")
+			if DEBUG_MODE: print(f"[GetRow] internal=({x},{y}) value={v}")
 
 			# 돌이 아닌 칸이면 라인 계산 안 함
 			if v not in (BLACK, WHITE):
@@ -448,7 +470,7 @@ class MainWindow(QtWidgets.QMainWindow):
 				raise AttributeError("GomokuBoard에 get_lines 함수가 없음 (Gomoku_Board.py에 구현했는지 확인)")
 
 			k = self.GomokuBoard.get_lines(x, y)
-			print("[GetRow result]", k)
+			if DEBUG_MODE: print("[GetRow result]", k)
 
 			QtWidgets.QMessageBox.information(self, "GetRow", str(k))
 			return k
